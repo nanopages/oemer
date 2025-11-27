@@ -35,6 +35,9 @@ def get_edge(data):
 
 
 def merge_nearby_bbox(bboxes: List[BBox], distance: float, x_factor: int = 1, y_factor: int = 1) -> List[BBox]:
+    if len(bboxes) < 2:
+        return list(bboxes)
+
     model = AgglomerativeClustering(n_clusters=None, distance_threshold=distance, compute_full_tree=True)
     centers = np.array([(bb[0]+bb[2], bb[1]+bb[3]) for bb in bboxes]) / 2
     centers[:, 0] *= x_factor  # Increase/decrease the x distance
