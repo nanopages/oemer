@@ -183,6 +183,10 @@ class Measure:
                 break
             sfns_cands.append(sym)
 
+        if not sfns_cands:
+            logger.warning("No key signature symbols detected; defaulting to C major/A minor (no accidentals).")
+            return Key(0)
+
         # Count occurance
         sfn_counts = [0 for _ in range(track_nums)]
         for sfn in sfns_cands:
